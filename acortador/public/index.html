@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="resources/styles.css">
+    <title>Acortador</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">
+            <img src="resources/cohete.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <b>Acortador</b>
+        </a>
+    </nav>
+        <div style="height: 70%; display: flex; justify-content: center; align-items: center;">
+            <form >
+                <div class="form-group">
+                    <h2>Acorte su link:</h2>
+                    <input type="text" class="form-control" id="url" placeholder="URL:">
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="urlobtenida" >
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        </div>
+                    </div>   
+                </div>
+            
+                <button style="width: 100%;" type="button" class="btn btn-primary" onclick="recortar()">Generar</button>
+            </form>
+        </div>
+    <footer class="page-footer font-small" style="background-color: #0069D9; color: #fff;">
+        <div class="footer-copyright text-center py-3"><b>© Mario Velandia</b></div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        function recortar()
+        {
+            var url = document.getElementById('url').value;
+            
+            var data = {
+                "url": url
+            }
+            
+            fetch('http://localhost/register', {
+                method: 'POST', 
+                body: JSON.stringify(data),
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => $('#urlobtenida').val(`${window.location}${response.id}`));
+        }
+    </script>
+</body>
+</html>
