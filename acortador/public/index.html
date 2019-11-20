@@ -47,7 +47,7 @@
                 "url": url
             }
             
-            fetch('http://localhost/register', {
+            fetch(`${window.location}register`, {
                 method: 'POST', 
                 body: JSON.stringify(data),
                 headers:{
