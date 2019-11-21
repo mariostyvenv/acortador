@@ -8,23 +8,23 @@
     <title>Acortador</title>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">
+    <nav class="navbar navbar-dark bg-primary" style="display: flex; justify-content: center;">
+        <a class="navbar-brand" href="#"> 
             <img src="resources/cohete.png" width="30" height="30" class="d-inline-block align-top" alt="">
             <b>Acortador</b>
         </a>
     </nav>
-        <div style="height: 70%; display: flex; justify-content: center; align-items: center;">
-            <form >
+        <div style="height: 90%; display: flex; justify-content: center; align-items: center;">
+            <form class="shadow p-3 mb-5 bg-white rounded">
                 <div class="form-group">
-                    <h2>Acorte su link:</h2>
+                    <h2 style="display: flex; justify-content: center; font-size: 30px;" class="display-4">Acorte su link:</h2>
                     <input type="text" class="form-control" id="url" placeholder="URL:">
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <input type="text" class="form-control" id="urlobtenida" >
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupPrepend">@</span>
+                            <span class="input-group-text" id="inputGroupPrepend"><a href="javascript:void()">:)</a></span>
                         </div>
                     </div>   
                 </div>
@@ -39,24 +39,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
-        function recortar()
+        const recortar = () =>
         {
-            var url = document.getElementById('url').value;
-            
-            var data = {
-                "url": url
-            }
-            
-            fetch(`${window.location}register`, {
-                method: 'POST', 
-                body: JSON.stringify(data),
-                headers:{
-                    'Content-Type': 'application/json'
+            let url = document.getElementById('url').value;
+            if(url != "" && url != null && url != undefined)
+            {
+                let data = {
+                    "url": url
                 }
-            })
-            .then(res => res.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => $('#urlobtenida').val(`${window.location}${response.id}`));
+                
+                fetch(`${window.location}register`, {
+                    method: 'POST', 
+                    body: JSON.stringify(data),
+                    headers:{
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => $('#urlobtenida').val(`ullk.tk/${response.id}`));
+            }
+            else
+            {
+                alert("El campo no puede quedar vacio")
+            }
         }
     </script>
 </body>

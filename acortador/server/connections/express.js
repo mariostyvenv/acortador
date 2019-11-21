@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 
 const validarExpress = () =>{
     return new Promise((resolve, reject)=>{
-        app.listen(3000, (res)=>{
+        app.listen(80, (res)=>{
             resolve();
         })
         .on('error', (err)=>{
